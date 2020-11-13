@@ -18,6 +18,7 @@ addGridCells(totalGrids, "black", "on");
 function colorInCell(e) {
     if (this.dataset.colorSwitch === "on") {
         if (this.dataset.color === "black") this.style.backgroundColor = "rgb(0,0,0)";
+        if (this.dataset.color === "white") this.style.backgroundColor = "rgb(255,255,255)";
         if (this.dataset.color === "random") {
             let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
             this.style.backgroundColor = randomColor;
@@ -94,6 +95,13 @@ function changeToGrayScale(e) {
     });
 }
 
+function changeToWhite(e) {
+    const gridCells = document.querySelectorAll(".grid-cell");
+    gridCells.forEach(cell => {
+        cell.removeAttribute("data-color");
+        cell.setAttribute("data-color", "white");
+    });
+}
 
 const blackBtn = document.querySelector(".black-btn");
 blackBtn.addEventListener("click", changeToBlack);
@@ -103,6 +111,9 @@ rainbowBtn.addEventListener("click", changeToRandom);
 
 const grayScaleBtn = document.querySelector(".gray-scale-btn");
 grayScaleBtn.addEventListener("click", changeToGrayScale);
+
+const whiteBtn = document.querySelector(".white-btn");
+whiteBtn.addEventListener("click", changeToWhite);
 
 function colorSwitch(e) {
     const gridCells = document.querySelectorAll(".grid-cell");
