@@ -1,0 +1,17 @@
+:root {
+    --row-number: 16;
+    --row-height: 500px;
+}
+
+.grid {
+    height: var(--row-height);
+    width: var(--row-height);
+    display: grid;
+    grid-template-columns: repeat(var(--row-number), 1fr);
+    grid-template-rows: repeat(var(--row-number), 1fr);
+    border: black 10px solid;
+}
+
+.grid-cell {
+    border: solid black 1px;
+}
