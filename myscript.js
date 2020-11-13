@@ -4,15 +4,17 @@ let totalGrids = totalRows * totalRows;
 for (let gridNumber = 0; gridNumber < totalGrids; gridNumber++) {
     let cell = document.createElement("div");
     cell.classList.add("grid-cell");
+    cell.setAttribute("data-color", "black");
     document.querySelector(".grid").appendChild(cell);
 }
 
-function colorInCell(e) {
+function colorCell(e) {
+    console.log(this.dataset.color);
     this.style.backgroundColor = "black";
 }
 
 const gridCells = document.querySelectorAll(".grid-cell");
-gridCells.forEach(cell => cell.addEventListener("mouseover", colorInCell));
+gridCells.forEach(cell => cell.addEventListener("mouseover", colorCell));
 
 function clearGridCells() {
     const gridCells = document.querySelectorAll(".grid-cell");
@@ -49,4 +51,38 @@ function resetGrid(e) {
 }
 
 const resetBtn = document.querySelector(".reset-btn");
-resetBtn.addEventListener("click", resetGrid)
+resetBtn.addEventListener("click", resetGrid);
+
+function changeToBlack(e) {
+    const gridCells = document.querySelectorAll(".grid-cell");
+    gridCells.forEach(cell => {
+        cell.removeAttribute("data-color");
+        cell.setAttribute("data-color", "black");
+    });
+}
+
+function changeToRandom(e) {
+    const gridCells = document.querySelectorAll(".grid-cell");
+    gridCells.forEach(cell => {
+        cell.removeAttribute("data-color");
+        cell.setAttribute("data-color", "random");
+    });
+}
+
+function changeToGrayScale(e) {
+    const gridCells = document.querySelectorAll(".grid-cell");
+    gridCells.forEach(cell => {
+        cell.removeAttribute("data-color");
+        cell.setAttribute("data-color", "gray-scale");
+    });
+}
+
+
+const blackBtn = document.querySelector(".black-btn");
+blackBtn.addEventListener("click", changeToBlack);
+
+const rainbowBtn = document.querySelector(".random-btn");
+rainbowBtn.addEventListener("click", changeToRandom);
+
+const grayScaleBtn = document.querySelector(".gray-scale-btn");
+grayScaleBtn.addEventListener("click", changeToGrayScale);
