@@ -15,3 +15,7 @@
 .grid-cell {
     border: solid black 1px;
 }
+
+button[data-switch="on"] {
+    background-color: yellow;
+}

@@ -13,10 +13,11 @@
     <h2>Click on grid to turn pen on and off</h2>
     <div class="buttons">
         <button class="reset-btn">Reset</button>
-        <button class="black-btn">Black</button>
-        <button class="random-btn">Random</button>
-        <button class="gray-scale-btn">Gray Scale</button>
-        <button class="white-btn">White</button>
+        <!-- first class name must be of the structure dataColor-btn for eventListeners on these buttons to work-->
+        <button class="black-btn change-btn" data-switch="on">Black</button>
+        <button class="random-btn change-btn">Random</button>
+        <button class="gray-scale-btn change-btn">Gray Scale</button>
+        <button class="white-btn change-btn">White</button>
     </div>
     <div class="grid"></div>
 

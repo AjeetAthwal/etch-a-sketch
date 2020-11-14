@@ -12,7 +12,6 @@ function addGridCells(totalGrids, gridColor, colorSwitch) {
     }
 }
 
-
 addGridCells(totalGrids, "black", "on");
 
 function colorInCell(e) {
@@ -25,10 +24,8 @@ function colorInCell(e) {
         }
         if (this.dataset.color === "gray-scale") {
             let cellColor = this.style.backgroundColor;
-            console.log(cellColor);
-
             let rgbColor = cellColor.substring(cellColor.indexOf("(") + 1, cellColor.indexOf(","));
-            console.log(rgbColor);
+
             if (cellColor == "") rgbColor = 220;
             else rgbColor -= 25;
             this.style.backgroundColor = `rgb(${rgbColor},${rgbColor},${rgbColor})`
@@ -71,49 +68,32 @@ function resetGrid(e) {
 const resetBtn = document.querySelector(".reset-btn");
 resetBtn.addEventListener("click", resetGrid);
 
-function changeToBlack(e) {
+
+function changeBtn(e) {
     const gridCells = document.querySelectorAll(".grid-cell");
+    const btns = document.querySelectorAll(".change-btn");
+
+    // this code relies on the first class name of these buttons being of the structure dataColor-btn <- this class MUST be first
+    let dataColorClass = this.className;
+    // keep only first class
+    if (dataColorClass.indexOf(" ") !== -1) dataColorClass = dataColorClass.substring(0, dataColorClass.indexOf(" "))
+    // remove "-btn"
+    let dataColor = dataColorClass.substring(0, dataColorClass.length - 4)
+
     gridCells.forEach(cell => {
         cell.removeAttribute("data-color");
-        cell.setAttribute("data-color", "black");
+        cell.setAttribute("data-color", dataColor);
     });
+
+    btns.forEach(btn => {
+        btn.removeAttribute("data-switch");
+    });
+    document.querySelector("." + dataColor + "-btn").setAttribute("data-switch", "on");
 }
 
-function changeToRandom(e) {
-    const gridCells = document.querySelectorAll(".grid-cell");
-    gridCells.forEach(cell => {
-        cell.removeAttribute("data-color");
-        cell.setAttribute("data-color", "random");
-    });
-}
+btns = document.querySelectorAll(".change-btn");
 
-function changeToGrayScale(e) {
-    const gridCells = document.querySelectorAll(".grid-cell");
-    gridCells.forEach(cell => {
-        cell.removeAttribute("data-color");
-        cell.setAttribute("data-color", "gray-scale");
-    });
-}
-
-function changeToWhite(e) {
-    const gridCells = document.querySelectorAll(".grid-cell");
-    gridCells.forEach(cell => {
-        cell.removeAttribute("data-color");
-        cell.setAttribute("data-color", "white");
-    });
-}
-
-const blackBtn = document.querySelector(".black-btn");
-blackBtn.addEventListener("click", changeToBlack);
-
-const rainbowBtn = document.querySelector(".random-btn");
-rainbowBtn.addEventListener("click", changeToRandom);
-
-const grayScaleBtn = document.querySelector(".gray-scale-btn");
-grayScaleBtn.addEventListener("click", changeToGrayScale);
-
-const whiteBtn = document.querySelector(".white-btn");
-whiteBtn.addEventListener("click", changeToWhite);
+btns.forEach(btn => btn.addEventListener("click", changeBtn));
 
 function colorSwitch(e) {
     const gridCells = document.querySelectorAll(".grid-cell");
@@ -122,7 +102,6 @@ function colorSwitch(e) {
         else cell.dataset.colorSwitch = "on";
     });
 }
-
 
 const mainGrid = document.querySelector(".grid");
 mainGrid.addEventListener("click", colorSwitch);
