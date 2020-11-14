@@ -27,11 +27,23 @@ function grayScaler(oldColor) {
 }
 
 function colorInCell(e) {
-    if (this.dataset.colorSwitch === "on") {
-        if (this.dataset.color === "black") this.style.backgroundColor = "rgb(0,0,0)";
-        if (this.dataset.color === "white") this.style.backgroundColor = "rgb(255,255,255)";
-        if (this.dataset.color === "random") this.style.backgroundColor = randomHexColor();
-        if (this.dataset.color === "gray-scale") this.style.backgroundColor = grayScaler(this.style.backgroundColor);
+    switch (this.dataset.colorSwitch) {
+        case "on":
+            switch (this.dataset.color) {
+                case "black":
+                    this.style.backgroundColor = "rgb(0,0,0)";
+                    break;
+                case "white":
+                    this.style.backgroundColor = "rgb(255,255,255)";
+                    break;
+                case "random":
+                    this.style.backgroundColor = randomHexColor();
+                    break;
+                case "gray-scale":
+                    this.style.backgroundColor = grayScaler(this.style.backgroundColor);
+                    break;
+            }
+            break
     }
 }
 
