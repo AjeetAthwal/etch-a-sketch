@@ -14,22 +14,24 @@ function addGridCells(totalGrids, gridColor, colorSwitch) {
 
 addGridCells(totalGrids, "black", "on");
 
+function randomHexColor() {
+    return "#" + Math.floor(Math.random() * 16777215).toString(16);
+}
+
+function grayScaler(oldColor) {
+    let rgbColor = oldColor.substring(oldColor.indexOf("(") + 1, oldColor.indexOf(","));
+
+    if (oldColor == "") rgbColor = 220;
+    else rgbColor -= 25;
+    return `rgb(${rgbColor},${rgbColor},${rgbColor})`
+}
+
 function colorInCell(e) {
     if (this.dataset.colorSwitch === "on") {
         if (this.dataset.color === "black") this.style.backgroundColor = "rgb(0,0,0)";
         if (this.dataset.color === "white") this.style.backgroundColor = "rgb(255,255,255)";
-        if (this.dataset.color === "random") {
-            let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-            this.style.backgroundColor = randomColor;
-        }
-        if (this.dataset.color === "gray-scale") {
-            let cellColor = this.style.backgroundColor;
-            let rgbColor = cellColor.substring(cellColor.indexOf("(") + 1, cellColor.indexOf(","));
-
-            if (cellColor == "") rgbColor = 220;
-            else rgbColor -= 25;
-            this.style.backgroundColor = `rgb(${rgbColor},${rgbColor},${rgbColor})`
-        };
+        if (this.dataset.color === "random") this.style.backgroundColor = randomHexColor();
+        if (this.dataset.color === "gray-scale") this.style.backgroundColor = grayScaler(this.style.backgroundColor);
     }
 }
 
